@@ -2,7 +2,7 @@ import torch
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = "Lab4Data.txt"
+filename = "data.txt"
 
 # Logs some info
 print(f"STARTING CALCULATIONS\nPrinting data to {filename}")
@@ -10,6 +10,7 @@ print(f"STARTING CALCULATIONS\nPrinting data to {filename}")
 # Samplesize - Confidence interval: 95% - Margin of error: 10%
 sampleSize = 97
 f = open(filename, "w")
+
 # Define weird function
 def weird_fun(x):
     return np.sin(1/x)
