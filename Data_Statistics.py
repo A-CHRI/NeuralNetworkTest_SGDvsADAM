@@ -1,4 +1,3 @@
-import csv
 import numpy as np
 
 sampleSize = 97
