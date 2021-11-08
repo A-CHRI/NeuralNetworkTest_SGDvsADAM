@@ -42,11 +42,9 @@ model.to(device)
 loss_fn = torch.nn.MSELoss(reduction='sum')
 
 # Use the optim package to define an Optimizer that will update the weights of
-# the model for us. Here we will use Adam; the optim package contains many other
-# optimization algoriths. The first argument to the Adam constructor tells the
-# optimizer which Tensors it should update.
+# the model for us.
 learning_rate = 1e-3
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
 # Number of iterations
 T = 5000
@@ -80,19 +78,10 @@ for i in range(sampleSize):
         loss = loss_fn(y_pred, y)
         Loss[t] = loss.item()
 
-        # Before the backward pass, use the optimizer object to zero all of the
-        # gradients for the variables it will update (which are the learnable
-        # weights of the model). This is because by default, gradients are
-        # accumulated in buffers( i.e, not overwritten) whenever .backward()
-        # is called. Checkout docs of torch.autograd.backward for more details.
+
+        # Backward pass: compute gradient of the loss with respect to model parameters
         optimizer.zero_grad()
-
-        # Backward pass: compute gradient of the loss with respect to model
-        # parameters
         loss.backward()
-
-        # Calling the step function on an Optimizer makes an update to its
-        # parameters
         optimizer.step()    
 
     # Calculate training data and fit
